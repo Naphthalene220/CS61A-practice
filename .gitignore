@@ -1,6 +1,10 @@
+#ok相关
 .ok_history
 .ok_messages
 .ok_storage.bak
 .ok_storage.dat
 .ok_storage.dir
+
+# 运行文件
 hog/tests/
+hog/__pycache__/
