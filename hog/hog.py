@@ -192,6 +192,9 @@ def always_roll(n):
     assert n >= 0 and n <= 10
     # BEGIN PROBLEM 6
     "*** YOUR CODE HERE ***"
+    def y (a,b):
+        return n
+    return y
     # END PROBLEM 6
 
 
@@ -223,6 +226,18 @@ def is_always_roll(strategy, goal=GOAL):
     """
     # BEGIN PROBLEM 7
     "*** YOUR CODE HERE ***"
+    alwaysn=strategy(0,0)
+    flag=True
+    i,j=0,0
+    while i < goal:
+        while j < goal:
+            if strategy(i,j)!=alwaysn:
+                flag=False
+                break
+            j+=1
+        i+=1
+        j=0
+    return flag
     # END PROBLEM 7
 
 
@@ -239,6 +254,12 @@ def make_averaged(original_function, samples_count=1000):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    def original_function_averaged(*args):
+        sum=0
+        for i in range(samples_count):
+            sum+=original_function(*args)
+        return sum/samples_count
+    return original_function_averaged
     # END PROBLEM 8
 
 
@@ -253,6 +274,14 @@ def max_scoring_num_rolls(dice=six_sided, samples_count=1000):
     """
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
+    max_average,roll=0,0
+    averaged_dice=make_averaged(roll_dice,samples_count)
+    for i in range(1,11):
+        average=averaged_dice(i,dice)
+        if max_average<average:
+            max_average=average
+            roll=i
+    return roll
     # END PROBLEM 9
 
 
@@ -297,14 +326,20 @@ def boar_strategy(score, opponent_score, threshold=11, num_rolls=6):
     points, and returns NUM_ROLLS otherwise. Ignore score and Sus Fuss.
     """
     # BEGIN PROBLEM 10
-    return num_rolls  # Remove this line once implemented.
+    if boar_brawl(score,opponent_score)>= threshold:
+        return 0
+    else:
+        return num_rolls
     # END PROBLEM 10
 
 
 def sus_strategy(score, opponent_score, threshold=11, num_rolls=6):
     """This strategy returns 0 dice when your score would increase by at least threshold."""
     # BEGIN PROBLEM 11
-    return num_rolls  # Remove this line once implemented.
+    if sus_update(0, score, opponent_score)-score>=threshold:
+        return 0
+    else:
+        return num_rolls
     # END PROBLEM 11
 
 
